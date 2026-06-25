@@ -2,14 +2,18 @@ FROM --platform=linux/amd64 ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV DISPLAY=:1
+ENV RESOLUTION=640x480
+ENV USER=root
 
 RUN apt update -y && apt install --no-install-recommends -y \
     lxde-core \
     tightvncserver \
+    novnc \
     websockify \
     openjdk-8-jre \
     wget \
     unzip \
+    x11vnc \
     xvfb \
     && apt clean && rm -rf /var/lib/apt/lists/*
 
@@ -36,6 +40,7 @@ RUN mkdir -p /root/.vnc && echo "#!/bin/sh" > /root/.vnc/xstartup \
 EXPOSE 6080
 
 CMD bash -c " \
+    export USER=root && \
     Xvfb :1 -screen 0 640x480x16 & \
     tightvncserver :1 -geometry 640x480 -depth 16 -SecurityTypes None -localhost no && \
     websockify --web=/usr/share/novnc 0.0.0.0:6080 localhost:5901 & \
