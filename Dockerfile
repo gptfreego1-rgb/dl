@@ -6,7 +6,7 @@ ENV USER=root
 RUN apt update -y && apt install --no-install-recommends -y \
     xfce4 \
     xfce4-goodies \
-    tightvncserver \
+    tigervnc-standalone-server \
     novnc \
     websockify \
     sudo \
@@ -51,7 +51,7 @@ RUN echo '#!/bin/bash' > /root/Desktop/ganti-password.sh \
     && echo 'chmod 600 /root/.vnc/passwd' >> /root/Desktop/ganti-password.sh \
     && echo 'vncserver -kill :1' >> /root/Desktop/ganti-password.sh \
     && echo 'sleep 2' >> /root/Desktop/ganti-password.sh \
-    && echo 'vncserver :1 -geometry 800x600 -depth 16 -rfbauth /root/.vnc/passwd -localhost no &' >> /root/Desktop/ganti-password.sh \
+    && echo 'tigervncserver :1 -geometry 800x600 -depth 16 -rfbauth /root/.vnc/passwd -localhost no &' >> /root/Desktop/ganti-password.sh \
     && echo 'zenity --info --text="Password berhasil diganti! VNC akan restart otomatis." --width=300' >> /root/Desktop/ganti-password.sh \
     && chmod +x /root/Desktop/ganti-password.sh
 
@@ -73,6 +73,6 @@ RUN echo "123456" | vncpasswd -f > /root/.vnc/passwd && chmod 600 /root/.vnc/pas
 EXPOSE 6080
 
 CMD bash -c " \
-    vncserver :1 -geometry 800x600 -depth 16 -rfbauth /root/.vnc/passwd -localhost no && \
+    tigervncserver :1 -geometry 800x600 -depth 16 -localhost no && \
     websockify --web=/usr/share/novnc 0.0.0.0:6080 localhost:5901 & \
     tail -f /dev/null"
