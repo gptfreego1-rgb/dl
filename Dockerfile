@@ -40,7 +40,6 @@ RUN mkdir -p /root/.vnc && echo "#!/bin/sh" > /root/.vnc/xstartup \
 EXPOSE 6080
 
 CMD bash -c " \
-    export USER=root && \
     Xvfb :1 -screen 0 640x480x16 & \
     tightvncserver :1 -geometry 640x480 -depth 16 -SecurityTypes None -localhost no && \
     websockify --web=/usr/share/novnc 0.0.0.0:6080 localhost:5901 & \
