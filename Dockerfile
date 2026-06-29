@@ -5,25 +5,18 @@ ENV DISPLAY=:1
 
 RUN apt-get update && apt-get install -y \
     xfce4 \
-    xfce4-goodies \
     xfce4-session \
-    xorg \
     tigervnc-standalone-server \
     tigervnc-tools \
     novnc \
     websockify \
     dbus-x11 \
     x11-xserver-utils \
-    x11-utils \
-    x11-apps \
     xterm \
-    sudo \
-    wget \
-    unzip \
-    curl \
     zenity \
+    wget \
     openjdk-17-jre \
-    && apt-get purge -y xfce4-power-manager \
+    firefox-esr \
     && apt-get autoremove -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
