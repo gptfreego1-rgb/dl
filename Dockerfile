@@ -22,7 +22,7 @@ RUN apt-get update && apt-get install -y \
     unzip \
     curl \
     zenity \
-    openjdk-8-jre \
+    openjdk-17-jre \
     && apt-get purge -y xfce4-power-manager \
     && apt-get autoremove -y \
     && apt-get clean \
