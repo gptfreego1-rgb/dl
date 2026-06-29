@@ -123,7 +123,7 @@ rm -rf /tmp/.X11-unix/X1
 
 tigervncserver :1 \
 -geometry 800x600 \
--depth 24 \
+-depth 16 \
 -localhost no
 
 sleep 3
